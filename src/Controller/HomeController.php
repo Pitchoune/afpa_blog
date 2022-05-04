@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,6 @@ class HomeController extends AbstractController
         $articles = $this->repoArticle->findAll();
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'aaa',
             "articles" => $articles
         ]);
     }

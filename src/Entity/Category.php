@@ -37,16 +37,11 @@ class Category
     /**
      * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="category")
      */
-    private $Author;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="category")
-     */
     private $articles;
 
     public function __construct()
     {
-        $this->Author = new ArrayCollection();
+        $this->author = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
 
@@ -96,13 +91,13 @@ class Category
      */
     public function getAuthor(): Collection
     {
-        return $this->Author;
+        return $this->author;
     }
 
     public function addAuthor(Article $author): self
     {
-        if (!$this->Author->contains($author)) {
-            $this->Author[] = $author;
+        if (!$this->author->contains($author)) {
+            $this->author[] = $author;
             $author->addCategory($this);
         }
 
@@ -111,7 +106,7 @@ class Category
 
     public function removeAuthor(Article $author): self
     {
-        if ($this->Author->removeElement($author)) {
+        if ($this->author->removeElement($author)) {
             $author->removeCategory($this);
         }
 
@@ -143,5 +138,10 @@ class Category
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

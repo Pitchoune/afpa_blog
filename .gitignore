@@ -18,3 +18,4 @@
 ###< phpunit/phpunit ###
 /.DS_Store
 /templates/.DS_Store
+/public/.DS_Store
