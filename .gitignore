@@ -17,3 +17,4 @@
 ###> phpunit/phpunit ###
 ###< phpunit/phpunit ###
 /.DS_Store
+/templates/.DS_Store
