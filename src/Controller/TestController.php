@@ -19,4 +19,14 @@ class TestController extends AbstractController
             'route' => $nomRoute
         ]);
     }
+
+    /**
+     * @Route("/route-param/{nom}", name="route_param")
+     */
+    public function routeParam(String $nom): Response
+    {
+        return $this->render('test/route-param.html.twig', [
+            'nom' => $nom
+        ]);
+    }
 }
