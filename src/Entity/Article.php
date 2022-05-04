@@ -53,6 +53,8 @@ class Article
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->createdAt= new \DateTimeImmutable();
+
     }
 
     public function getId(): ?int
