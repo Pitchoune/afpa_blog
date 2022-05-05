@@ -23,7 +23,8 @@ class ArticleCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextEditorField::new('content'),
-            ImageField::new('image')->setUploadDir("/public/images/blog")->setBasePath("/images/blog")->setRequired(false),
+            ImageField::new('image')->setUploadDir("/public/images/blog")->setBasePath("/images/blog")
+                ->setRequired(false),
             AssociationField::new('author'),
             AssociationField::new('category')
 
