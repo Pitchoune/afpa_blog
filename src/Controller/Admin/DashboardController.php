@@ -19,9 +19,6 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        // $routeBuilder = $this->get(AdminUrlGenerator::class);
-        // return $this->redirect($routeBuilder->setController(ArticleCrudController::class)->generateUrl());
-
         return parent::index();
     }
 
@@ -37,6 +34,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
+
+        yield MenuItem::section('Users');
+        yield MenuItem::linkToRoute('Ajout d\'admin', 'fa fa-user-plus', 'security_register', ["user_type" => "admin"]);
+        yield MenuItem::section('Front-office');
+        yield MenuItem::linkToRoute('Site', 'fa fa-home', 'home');
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
