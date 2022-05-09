@@ -6,24 +6,36 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <a class="nav-link" href="{{path('home')}}">Accueil
-          <span class="sr-only">(current)</span>
-      </a>
-      <ul class="nav navbar-nav navbar-right mr-3">
-        {% if app.user %}
-          <li>
-            <a href="{{ path('security_logout')}}" class="btn btn-danger ml-3">Déconnexion</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{{ path('security_register', {user_type: "user"})}}" class="btn btn-success">Inscription</a>
-          </li>
-          <li>
-            <a href="{{ path('security_login')}}" class="btn btn-info ml-3">Connexion</a>
-          </li>
-        {% endif %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{{path('home')}}">Accueil
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right mr-3">
+      <form class="form-inline" role="search" method="post" action="{{ path('recherche') }}">
+        <div class="form-group">
+          <input type="text" class="form-control mr-2" name="title" placeholder="Recherche...">
+          <input type="date" class="form-control mr-2" name="date" placeholder="Choisir une date">
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
+      </form>
 
-      </ul>
+      {% if app.user %}
+        <li>
+          <a href="{{ path('security_logout')}}" class="btn btn-danger ml-3">Déconnexion</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{{ path('security_register', {user_type: "user"})}}" class="btn btn-success">Inscription</a>
+        </li>
+        <li>
+          <a href="{{ path('security_login')}}" class="btn btn-info ml-3">Connexion</a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </nav>

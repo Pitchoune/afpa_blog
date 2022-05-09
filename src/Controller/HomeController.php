@@ -85,5 +85,22 @@ class HomeController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @Route("/recherche", name="recherche")
+     */
+    public function recherche(Request $request, PaginatorInterface $paginator): Response
+    {
+        $date = \DateTime::createFromFormat("Y-m-d", date($request->request->get('date')));
+        //dd($date);
+        $articles = $this->repoArticle->findByTitleLike($request->request->get('title'), $date);
+        $articlesPag = $paginator->paginate(
+            $articles, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+        return $this->render('home/index.html.twig', [
+            "articles" => $articlesPag,
+            "categories" => $this->repoCategory->findAll()
+        ]);
+    }
 }
