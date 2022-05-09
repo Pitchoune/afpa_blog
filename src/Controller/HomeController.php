@@ -6,9 +6,11 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -25,13 +27,19 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $categories = $this->repoCategory->findAll();
         $articles = $this->repoArticle->findAll();
 
+        $articlesPag = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('home/index.html.twig', [
-            "articles" => $articles,
+            "articles" => $articlesPag,
             "categories" => $categories
         ]);
     }
@@ -54,7 +62,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/showArticles/{id}", name="show_articles")
      */
-    public function showArticles(?Category $category): Response
+    public function showArticles(?Category $category, Request $request, PaginatorInterface $paginator): Response
     {
         if ($category)
         {
@@ -65,8 +73,14 @@ class HomeController extends AbstractController
             return $this->redirectToRoute("home");
         }
 
+        $articlesPag = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('home/index.html.twig', [
-            "articles" => $articles,
+            "articles" => $articlesPag,
             "categories" => $this->repoCategory->findAll()
         ]);
     }
