@@ -19,5 +19,5 @@
 /.DS_Store
 /templates/.DS_Store
 /public/.DS_Store
-/public/images/.DS_Store
-/public/images/blog/594w1c.jpg
+/public/images/blog/*
+/public/images/category/*
